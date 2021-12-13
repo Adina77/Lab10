@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ViewPosts</title>
+</head>
+
+<body style="background-color:  rgb(190, 190, 243);">
+    <h2>Select the username of the user whose posts you wish to view:</h2>
+    <form action="ViewUserPosts.php" method="post">
+        <select name="user" id="user">
+            <?php
+                $connection = new mysqli("mysql.eecs.ku.edu", "harsay", "seijoo9k", "harsay");
+                $query = "SELECT user_id FROM Users";
+                if ($result = $connection->query($query)) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row["user_id"] . "'>" . $row["user_id"] . "</option>";
+                    }
+                    $result->close();
+                }
+            ?>
+
+        </select>
+        <input type="submit" id="submit">
+    </form>
+</body>
+
+</html>
